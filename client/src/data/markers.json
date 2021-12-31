@@ -1,0 +1,42 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.505, -0.09]
+        },
+        "properties": {
+            "id":  "0001",
+          "name": "DOUBLE OAKS CENTER",
+          "info": "1326 WOODWARD AV"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.10, -0.2]
+        },
+        "properties": {
+            "id":  "0002",
+          "name": "DOUBLE OAKS NEIGHBORHOOD PARK",
+          "info": "2605  DOUBLE OAKS RD"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.30, -0.9]
+        },
+        "properties": {
+            "id":  "0003",
+          "name": "DOUBLE OAKS PARK",
+          "info": "2606  DOUBLE OAKS RD"
+        }
+      }
+    ]
+  }
+  
