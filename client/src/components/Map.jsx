@@ -4,31 +4,8 @@ import { indigo } from '@mui/material/colors';
 import { useData } from '../data/DataContext';
 import Layers from './Layers'
 import L from 'leaflet';
-import pirate from '../icons/pirate-flag.png';
-import leaf_green from '../icons/leaf-green.png';
 import red_flag from '../icons/red-flag.png';
 
-const iconPipate = new L.Icon({
-  iconUrl: pirate,
-  iconRetinaUrl: pirate,
-  iconAnchor: null,
-  popupAnchor: null,
-  shadowUrl: null,
-  shadowSize: null,
-  shadowAnchor: null,
-  iconSize: new L.Point(32, 24),
-  className: 'leaflet-div-icon'
-});
-var greenIcon = L.icon({
-  iconUrl: leaf_green,
-  shadowUrl: '../icons/leaf-shadow.png',
-
-  iconSize: [38, 95], // size of the icon
-  shadowSize: [50, 64], // size of the shadow
-  iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-  shadowAnchor: [4, 62],  // the same for the shadow
-  popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
 var redFlagIcon = L.icon({
   iconUrl: red_flag,
   shadowUrl: null,
