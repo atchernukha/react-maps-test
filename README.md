@@ -2,13 +2,13 @@
 
 ## Used Technologies
 
-* React/Redux, Material UI to build frontend
+* React, Material UI to build frontend
 * Node/Express, Sequelize to backend
 * Postgres database
 
 ## Result
 
-You can check the app running clicking [here](https://react-trello-like.herokuapp.com/)
+You can check the app running clicking [here](https://.herokuapp.com/)
 
 ## How to Run
 
@@ -68,7 +68,6 @@ After following these steps, the terminal will show you in which port it's runni
 > ## Technical requirements:
 >* SPA approach for frontend
 >* React/Vue.js should be used
->* State management on frontend (like redux, vuex)
 >* Node.js for backend
 >* Database (MongoDB / PostgreSQL / MySQL)
 

@@ -1,37 +1,29 @@
 import React, { useState } from 'react';
 import { useMapEvents, TileLayer, LayersControl, LayerGroup, GeoJSON, Marker, Popup, useMap, } from 'react-leaflet'
 import { Typography, Divider } from '@mui/material';
-// import markers from '../data/markers.json';
 import { useData } from '../data/DataContext';
 import MarkerList from './MarkerList';
 // import plane from 'https://www.iconspng.com/clipart/pirate-flag/pirate-flag.svg';
 
 const Layers = () => {
+    const { value, setValues } = useData()
     const map = useMap()
-    // const map = useMapEvents({
-    //     zoomend: () => {
-    //         console.log(map.getZoom())
-    //     },
-    //     moveend: () => {
-    //         console.log(map.getBounds())
-    //     },
-    // })
+    const map1 = useMapEvents({
+        zoomend: () => {
+            console.log(map.getZoom())
+        },
+        moveend: () => {
+            const {_northEast, _southWest} =  map.getBounds();
+                  setValues( {"filtered":  value.features.filter(marker => 
+                             (_southWest.lat < marker.geometry.coordinates[0] 
+                            && marker.geometry.coordinates[0] < _northEast.lat
+                            && _southWest.lng < marker.geometry.coordinates[1] 
+                            && marker.geometry.coordinates[1] < _northEast.lng))}  )
+        },
+    })
     console.log("Map Bounds:", map.getBounds())
     console.log("Zoom Level:", map.getZoom())
-    const { value, setValues } = useData()
-
-    const onMouseEvent = (event, type) => {
-        switch (type) {
-            case 'over':
-                event.target.setStyle({ fillOpacity: 0.5 })
-                break
-            case 'out':
-                event.target.setStyle({ fillOpacity: 0.0 })
-                break
-            default:
-                break
-        }
-    }
+    console.log(value)
 
     return (
         <>
@@ -45,16 +37,20 @@ const Layers = () => {
                 {/* <MarkerList /> */}
                 {
                     // Iterate the borderData with .map():
-                    value?.features.map((marker) => {
+                    value?.features?.map((marker) => {
                         // Get the layer data from geojson:
-                        const geojson = marker.geometry
+                        // const geojson = marker.geometry
                         // Get the name of the state from geojson:
-                        const state_name = marker.properties.name
+                        // const state_name = marker.properties.name
                         return (
                             // Pass data to layer via props:
-                            <Marker key={marker.properties.id} position={marker.geometry.coordinates}>
+                            <Marker key={marker?.properties?.id} position={marker?.geometry?.coordinates} eventHandlers={{
+                                click: (e) => {
+                                  setValues( {"filtered":  [marker] } )
+                                },
+                              }}>
                                 <Popup>
-                                    {marker.properties.name} <br /> {marker.properties.info}
+                                    {marker?.properties?.name} <br /> {marker?.properties?.info}
                                 </Popup>
                             </Marker>
                         )
