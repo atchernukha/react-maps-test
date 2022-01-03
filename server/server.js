@@ -9,7 +9,6 @@ const app = express();
 
 app.use(cors())
 app.use(fileUpload({}))
-app.use(cors())
 app.use(express.json())
 app.use('/api', router)
 app.use(express.static(path.resolve(__dirname, 'static')))
