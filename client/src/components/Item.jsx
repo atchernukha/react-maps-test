@@ -8,21 +8,21 @@ import { useData } from '../data/DataContext';
 export default function Item({ id, name, info, img }) {
     const { value, setValues } = useData();
     const deleteHandler = () => {
-        // const baseURL = process.env.REACT_APP_API_HOST + 'api'
-        // axios({
-        //     url: baseURL + '/item/'+id,
-        //     method: 'DELETE',
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'multipart/form-data',
-        //     },
-        // }).then(res => {
-        //     const marker = { ...res.data, "marked": true };
-        //     setValues({
-        //         "features": [value?.features.filter(marker => marker.properties.id != id ), marker],
-        //         "filtered": [value.filtered.filter(marker => marker.properties.id != id ), marker],
-        //     });
-        // });
+        const baseURL = process.env.REACT_APP_API_HOST + 'api'
+        axios({
+            url: baseURL + '/item/'+id,
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data',
+            },
+        }).then(res => {
+            const marker = { ...res.data, "marked": true };
+            // setValues({
+            //     "features": [value?.features.filter(marker => marker.properties.id != id ), marker],
+            //     "filtered": [value.filtered.filter(marker => marker.properties.id != id ), marker],
+            // });
+        });
     }
 
     return (
