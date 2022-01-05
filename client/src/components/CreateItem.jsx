@@ -3,7 +3,7 @@ import {
     Button, TextField, InputLabel, Typography, FormControl, Stack, Box, Input,
     Fab, CardMedia, FilledInput, Card, CardContent, Grid, CardActions, IconButton
 } from '@mui/material';
-import { indigo } from '@mui/material/colors';
+import { indigo, green } from '@mui/material/colors';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import Item from './Item';
 import { useData } from '../data/DataContext';
@@ -13,7 +13,7 @@ const baseURL = process.env.REACT_APP_API_HOST + 'api'
 
 export default function CreateItem() {
     const { value, setValues } = useData();
-    const [form, setForm] = useState({ itemName: '', info: '', file: null })
+    const [form, setForm] = useState({ itemName: '', info: ''})
     const [file, setFile] = useState(null)
     const selectFile = e => {
         setFile(e.target.files[0]);
@@ -52,6 +52,7 @@ export default function CreateItem() {
     }
     return (
         <Card sx={{ bgcolor: indigo[100], mx: "20px", mt: 2, mb: 2, borderRadius: 2 }} >
+            <Grid container component="form" justifyContent="center" spacing={1}>
             {!!value?.currentMarker ?
                 <Typography variant="body2" color="secondary" sx={{ mt: 3 }}>
                     Latitude: {value.currentMarker[0]}  <br />
@@ -68,6 +69,7 @@ export default function CreateItem() {
                 variant="standard"
                 sx={{ mx: "20px", mt: 4 }}
                 fullWidth
+                required
                 onChange={handleChange}
             />
             <TextField
@@ -87,7 +89,7 @@ export default function CreateItem() {
                     </Typography>
                     <CardMedia
                         component="img"
-                        sx={{ height: 300, mt: 3 }}
+                        sx={{ height: 250, width: "100%", mt: 3, mx: 2 }}
                         src={URL.createObjectURL(file)}
                         alt={"No files chosen"}
                     />
@@ -101,8 +103,8 @@ export default function CreateItem() {
                     <Grid
                         container
                         direction="row"
-                        justifyContent="space-between"
-                        alignItems="center"
+                        // justifyContent="space-between"
+                        // alignItems="center"
                     >
                         <FormControl component="span" fullWidth sx={{ mx: "20px", mt: "4px" }} variant="standard" >
                             <label htmlFor="upload-photo">
@@ -111,13 +113,14 @@ export default function CreateItem() {
                                     id="upload-photo"
                                     name="upload-photo"
                                     type="file"
+                                    required
                                     onChange={selectFile}
                                 />
                                 <IconButton
                                     component="span"
-                                    color="secondary"
+                                    // color = "green[400]"
                                     size="small"
-                                    sx={{ position: "relative", top: 0, right: 0 }}>
+                                    sx={{ position: "relative", top: 0, right: 0, color: green[400] }}>
                                     <CreateNewFolderIcon />
                                 </IconButton>
                             </label>
@@ -128,14 +131,16 @@ export default function CreateItem() {
                 <Typography variant="body2" color="text.secondary">
                     {/* {info} */}
                 </Typography>
-            </CardContent>
-            <CardActions sx={{mb: 4}}>
+            <CardActions sx={{mb: 2}}>
                 <Stack direction="row" spacing={2} sx={{ justifyContent: 'center', mt: 2 }}>
                     <Button variant="outlined" onClick={handleClose} color="primary">Cancel</Button>
-                    <Button color="primary" variant="contained" onClick={addItem} >Add</Button>
+                    <Button color="primary" variant="contained" 
+                        disabled={!form.itemName || !file || !value?.currentMarker}
+                        onClick={addItem} >Add</Button>
                 </Stack>
-
             </CardActions>
+            </CardContent>
+            </Grid>
         </Card>
         // <Box component="form"  >
         //     {!!value?.currentMarker ?

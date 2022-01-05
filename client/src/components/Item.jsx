@@ -26,10 +26,11 @@ export default function Item({ id, name, info, img }) {
     }
 
     return (
-        <Card sx={{ bgcolor: indigo[100], mx: "20px", mt: 2, borderRadius: 2 }} >
+        <Card sx={{ bgcolor: indigo[100], ml: 1, mt: 2, borderRadius: 2 }} >
+            <Grid container component="form" justifyContent="center" spacing={1}>
             <CardMedia
                 component="img"
-                sx={{ height: 250 }}
+                sx={{ height: 250, mx: 2 }}
                 image={process.env.REACT_APP_API_HOST + img}
                 alt={name}
             />
@@ -39,7 +40,7 @@ export default function Item({ id, name, info, img }) {
                         container
                         direction="row"
                         justifyContent="space-between"
-                        alignItems="center"
+                        // alignItems="center"
                     >
                         {name}
                         <IconButton color="secondary"
@@ -56,6 +57,7 @@ export default function Item({ id, name, info, img }) {
             </CardContent>
             <CardActions>
             </CardActions>
+            </Grid>
         </Card>
     )
 }
