@@ -17,11 +17,10 @@ export default function Item({ id, name, info, img }) {
                 'Content-Type': 'multipart/form-data',
             },
         }).then(res => {
-            const marker = { ...res.data, "marked": true };
-            // setValues({
-            //     "features": [value?.features.filter(marker => marker.properties.id != id ), marker],
-            //     "filtered": [value.filtered.filter(marker => marker.properties.id != id ), marker],
-            // });
+            setValues({
+                "features": value?.features.filter(marker => marker.properties.id != id ),
+                "filtered": value.filtered.filter(marker => marker.properties.id != id )
+            });
         });
     }
 
