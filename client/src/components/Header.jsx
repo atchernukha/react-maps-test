@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormControl, InputLabel, AppBar, Toolbar, Typography, Box, Link, IconButton } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { blue, green } from '@mui/material/colors';
+import { brown, green } from '@mui/material/colors';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { useData } from '../data/DataContext';
 
@@ -11,10 +11,10 @@ export default function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ bgcolor: blue[200] }}>
+            <AppBar position="static" sx={{ bgcolor: brown[200] }}>
                 <Toolbar component="form">
                     <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
-                        React Map App
+                        React Maps App
                         <Link href="https://github.com/atchernukha/react-maps-test" underline="hover" variant="h6" sx={{ mx: "20px", }} >
                             {'<source: /> '}
                             <GitHubIcon />

@@ -3,7 +3,7 @@ import {
     Button, TextField, InputLabel, Typography, FormControl, Stack, Box, Input,
     Fab, CardMedia, FilledInput, Card, CardContent, Grid, CardActions, IconButton
 } from '@mui/material';
-import { indigo, green } from '@mui/material/colors';
+import { brown, green } from '@mui/material/colors';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import Item from './Item';
 import { useData } from '../data/DataContext';
@@ -51,7 +51,7 @@ export default function CreateItem() {
         });
     }
     return (
-        <Card sx={{ bgcolor: indigo[100], mx: "20px", mt: 2, mb: 2, borderRadius: 2 }} >
+        <Card sx={{ bgcolor: brown[50], mx: "20px", mt: 2, mb: 2, borderRadius: 2 }} >
             <Grid container component="form" justifyContent="center" spacing={1}>
             {!!value?.currentMarker ?
                 <Typography variant="body2" color="secondary" sx={{ mt: 3 }}>

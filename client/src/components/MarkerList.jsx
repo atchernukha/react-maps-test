@@ -9,7 +9,7 @@ export default function MarkerList() {
  
     return (
         <Grid container justifyContent="center" spacing={2} sx={{pt: 2}} >
-            <Box sx={{ maxWidth: 400, maxHeight: "94vh", overflowY: "scroll" }}>
+            <Box sx={{ maxWidth: 410, height: "93vh", overflowY: "scroll" }}>3
             {value ? value?.filtered?.map(marker =>(
                 <Grid key={marker?.properties?.id} item>
                     <Item {...marker?.properties} />

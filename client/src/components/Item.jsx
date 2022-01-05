@@ -1,5 +1,5 @@
 import { Card, CardActions, CardContent, CardMedia, Typography, IconButton, Grid } from '@mui/material';
-import { indigo } from '@mui/material/colors';
+import { brown } from '@mui/material/colors';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import React from 'react';
 import axios from 'axios';
@@ -26,11 +26,11 @@ export default function Item({ id, name, info, img }) {
     }
 
     return (
-        <Card sx={{ bgcolor: indigo[100], ml: 1, mt: 2, borderRadius: 2 }} >
+        <Card sx={{ bgcolor: brown[50], mx: 2, mt: 2, borderRadius: 2 }} >
             <Grid container component="form" justifyContent="center" spacing={1}>
             <CardMedia
                 component="img"
-                sx={{ height: 250, mx: 2 }}
+                sx={{ height: 250 }}
                 image={process.env.REACT_APP_API_HOST + img}
                 alt={name}
             />
@@ -40,13 +40,13 @@ export default function Item({ id, name, info, img }) {
                         container
                         direction="row"
                         justifyContent="space-between"
-                        // alignItems="center"
+                        alignItems="center"
                     >
                         {name}
                         <IconButton color="secondary"
                             onClick={deleteHandler}
-                            size="small"
-                            sx={{ position: "relative", top: 0, right: 0 }}>
+                            size="small">
+                            {/* // sx={{ position: "relative", top: 0, right: 0 }}> */}
                             <HighlightOffIcon />
                         </IconButton>
                     </Grid>
