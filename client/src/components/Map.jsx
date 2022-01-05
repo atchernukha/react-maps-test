@@ -9,12 +9,8 @@ import red_flag from '../icons/red-flag.png';
 var redFlagIcon = L.icon({
   iconUrl: red_flag,
   shadowUrl: null,
-
   iconSize: [32, 36], // size of the icon
-  // shadowSize: [32, 32], // size of the shadow
   iconAnchor: [6, 36], // point of the icon which will correspond to marker's location
-  shadowAnchor: [4, 62],  // the same for the shadow
-  // popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
 
