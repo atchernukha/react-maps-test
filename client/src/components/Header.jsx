@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl, InputLabel, AppBar, Toolbar, Typography, Box, Link, IconButton } from '@mui/material';
+import { FormControl, Button, AppBar, Toolbar, Typography, Box, Link, IconButton } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { brown, green } from '@mui/material/colors';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -22,9 +22,10 @@ export default function Header() {
                     </Typography>
 
                     <Box sx={{ mx: "20px", }} >
-                        <IconButton onClick={addItem} size="small" sx={{ color: green[400] }}>
+                    <Button variant="contained"  onClick={addItem}>Add Item</Button>
+                        {/* <IconButton onClick={addItem} size="small" sx={{ color: green[400] }}>
                             <AddCircleOutlineIcon />
-                        </IconButton>
+                        </IconButton> */}
                     </Box>
                 </Toolbar>
             </AppBar>

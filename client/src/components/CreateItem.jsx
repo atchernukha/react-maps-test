@@ -35,7 +35,6 @@ export default function CreateItem() {
             method: 'POST',
             data: formData,
             headers: {
-                Accept: 'application/json',
                 'Content-Type': 'multipart/form-data',
             },
         }).then(res => {
@@ -113,6 +112,7 @@ export default function CreateItem() {
                                     id="upload-photo"
                                     name="upload-photo"
                                     type="file"
+                                    accept="image/*"
                                     required
                                     onChange={selectFile}
                                 />

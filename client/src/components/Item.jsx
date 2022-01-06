@@ -43,8 +43,8 @@ export default function Item({ id, name, info, img }) {
                     >
                         {name}
                         <IconButton color="secondary"
-                            onClick={deleteHandler}
-                            size="small">
+                            onClick={deleteHandler}>
+                            {/* size="small"> */}
                             {/* // sx={{ position: "relative", top: 0, right: 0 }}> */}
                             <HighlightOffIcon />
                         </IconButton>
