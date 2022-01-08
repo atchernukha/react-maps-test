@@ -1,31 +1,33 @@
 import React from 'react';
-import { FormControl, Button, AppBar, Toolbar, Typography, Box, Link, IconButton } from '@mui/material';
+import { Button, AppBar, Toolbar, Typography, Box, Link } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { brown, green } from '@mui/material/colors';
+import { brown } from '@mui/material/colors';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { useData } from '../data/DataContext';
 
 export default function Header() {
     const { value, setValues } = useData()
-    const addItem = e => { setValues( {"formOpened": true } )}
-
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" sx={{ bgcolor: brown[200] }}>
                 <Toolbar component="form">
                     <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
                         React Maps App
-                        <Link href="https://github.com/atchernukha/react-maps-test" underline="hover" variant="h6" sx={{ mx: "20px", }} >
+                        <Link href="https://github.com/atchernukha/react-maps-test"
+                            underline="hover"
+                            variant="h6"
+                            sx={{ ml: 5, color: '#fff' }} >
                             {'<source: /> '}
-                            <GitHubIcon />
+                            <GitHubIcon sx={{ ml: 2 }} />
                         </Link>
                     </Typography>
-
                     <Box sx={{ mx: "20px", }} >
-                    {/* <Button variant="contained"  onClick={addItem}>Add Item</Button> */}
-                        <IconButton onClick={addItem} size="small" sx={{ color: green[400] }}>
-                            <AddCircleOutlineIcon />
-                        </IconButton>
+                        <Button variant="text" 
+                        onClick={e => { setValues({ "formOpened": true }) }} 
+                        sx={{ color: '#fff' }}>
+                            add for rent
+                            <AddCircleOutlineIcon sx={{ ml: 2 }} />
+                        </Button>
                     </Box>
                 </Toolbar>
             </AppBar>
