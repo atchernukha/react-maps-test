@@ -1,17 +1,19 @@
-const uuid = require('uuid')
+// const uuid = require('uuid')
 const path = require('path')
 const fs = require('fs')
+const s3 = require('../s3')
 const { Item } = require('../models/models')
+
 
 class ItemController {
     async create(req, res) {
+        const { lat, long, name, info } = req.body
+
         try {
-            const { lat, long, name, info } = req.body
-            const { img } = req.files
-            let fileName = uuid.v4() + ".jpg"
-            img.mv(path.resolve(__dirname, '..', 'static', fileName))
-            const item = await Item.create({ lat, long, name, info, img: fileName })
-            return res.json(
+            await s3.uploadFile(req.file)
+            const item = await Item.create({ lat, long, name, info, img: req.file.filename })
+
+            res.status(201).json(
                 {
                     "type": "Feature",
                     "geometry": {
@@ -51,7 +53,7 @@ class ItemController {
             return res.json(
                 {
                     "type": "FeatureCollection",
-                    "features": items.map( item => (
+                    "features": items.map(item => (
                         {
                             "type": "Feature",
                             "geometry": {
@@ -62,7 +64,7 @@ class ItemController {
                                 "id": item.id,
                                 "name": item.name,
                                 "info": item.info,
-                                "img": item.img
+                                "img": "images/" + item.img
                             }
                         }
                     ))
@@ -80,6 +82,7 @@ class ItemController {
             const item = await Item.findOne({ where: { id } })
             await Item.destroy({ where: { id: id } })
             fs.unlinkSync(path.resolve(__dirname, '..', 'static', item.img))
+            await s3.deleteFile(item.img)
             res.status(200).json({ message: "Deleted successfully" });
         }
         catch (e) {

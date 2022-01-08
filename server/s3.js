@@ -6,16 +6,15 @@ const secretKey = process.env.S3_BUCKET_ACCESS_SECRET
 const region = process.env.S3_BUCKET_REGION
 
 const s3 = new S3({
-  region,
-  accessKeyId,
-  secretAccessKey
+//   region,
+    accessKeyId: process.env.S3_BUCKET_ACCESS_KEY,
+    secretAccessKey: process.env.S3_BUCKET_ACCESS_SECRET
 })
 
 function uploadFile(file) {
   let fileStream = fs.createReadStream(file.path)
-
   const uploadParams = {
-    Bucket: bucketName, 
+    Bucket: process.env.S3_BUCKET_NAME, 
     Key: file.filename, 
     Body: fileStream
   }
@@ -26,7 +25,7 @@ exports.uploadFile = uploadFile
 
 function getFileStream(fileKey) {
   const downloadParams = {
-      Bucket: bucketName,
+      Bucket: process.env.S3_BUCKET_NAME,
       Key: fileKey,
   }
 
@@ -34,3 +33,21 @@ function getFileStream(fileKey) {
   return fileStream
 }
 exports.getFileStream = getFileStream
+
+const deleteFile = (fileName) => {
+    // Setting up S3 delete parameters
+    const params = {
+        Bucket: process.env.S3_BUCKET_NAME,
+        Key: fileName, // File name you want to delete in S3
+    };
+
+    // Delete file in the bucket
+    s3.deleteObject(params, function(err, data) {
+        if (err) {
+            throw err;
+        }
+        console.log(`File deleted successfully. ${data}`);
+    });
+};
+
+exports.deleteFile = deleteFile

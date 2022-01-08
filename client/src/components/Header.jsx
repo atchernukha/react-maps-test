@@ -22,10 +22,10 @@ export default function Header() {
                     </Typography>
 
                     <Box sx={{ mx: "20px", }} >
-                    <Button variant="contained"  onClick={addItem}>Add Item</Button>
-                        {/* <IconButton onClick={addItem} size="small" sx={{ color: green[400] }}>
+                    {/* <Button variant="contained"  onClick={addItem}>Add Item</Button> */}
+                        <IconButton onClick={addItem} size="small" sx={{ color: green[400] }}>
                             <AddCircleOutlineIcon />
-                        </IconButton> */}
+                        </IconButton>
                     </Box>
                 </Toolbar>
             </AppBar>

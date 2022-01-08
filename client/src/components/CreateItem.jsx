@@ -5,7 +5,6 @@ import {
 } from '@mui/material';
 import { brown, green } from '@mui/material/colors';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import Item from './Item';
 import { useData } from '../data/DataContext';
 import axios from "axios";
 
@@ -15,9 +14,6 @@ export default function CreateItem() {
     const { value, setValues } = useData();
     const [form, setForm] = useState({ itemName: '', info: ''})
     const [file, setFile] = useState(null)
-    const selectFile = e => {
-        setFile(e.target.files[0]);
-    }
     const handleClose = () => setValues({ "formOpened": false });
     const handleChange = (event) => {
         setForm({ ...form, [event.target.name]: event.target.value });
@@ -112,9 +108,9 @@ export default function CreateItem() {
                                     id="upload-photo"
                                     name="upload-photo"
                                     type="file"
-                                    accept="image/*"
+                                    // accept="image/*"
                                     required
-                                    onChange={selectFile}
+                                    onChange={ e => setFile(e.target.files[0]) }
                                 />
                                 <IconButton
                                     component="span"
