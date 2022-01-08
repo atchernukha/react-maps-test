@@ -24,7 +24,7 @@ class ItemController {
                         "id": item.id,
                         "name": item.name,
                         "info": item.info,
-                        "img": item.img
+                        "img": "images/" + item.img
                     }
                 }
             )
