@@ -2,7 +2,15 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useMapEvent, TileLayer,  Marker, Popup, useMap, } from 'react-leaflet'
 import { useData } from '../data/DataContext';
+import L from 'leaflet';
+import forRent from '../icons/forRent.svg';
 
+var forRentIcon = L.icon({
+    iconUrl: forRent,
+    shadowUrl: null,
+    iconSize: [36, 36], // size of the icon
+    iconAnchor: [6, 36], // point of the icon which will correspond to marker's location
+  });
 const Layers = () => {
     const { value, setValues } = useData()
     const map = useMap()
@@ -41,7 +49,11 @@ const Layers = () => {
                 {
                     value?.features?.map((marker) => {
                         return (
-                            <Marker key={marker?.properties?.id} position={marker?.geometry?.coordinates} eventHandlers={{
+                            <Marker 
+                            key={marker?.properties?.id} 
+                            position={marker?.geometry?.coordinates} 
+                            icon={forRentIcon}
+                            eventHandlers={{
                                 click: (e) => {
                                   setValues( {"currentMarker":  marker } )
                                 },
