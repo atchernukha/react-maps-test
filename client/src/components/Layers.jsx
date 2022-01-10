@@ -1,23 +1,36 @@
-import React from 'react';
-import { useMapEvents, TileLayer, LayersControl, Marker, Popup, useMap, } from 'react-leaflet'
+import React, { useEffect } from 'react';
+import axios from 'axios';
+import { useMapEvent, TileLayer,  Marker, Popup, useMap, } from 'react-leaflet'
 import { useData } from '../data/DataContext';
 
 const Layers = () => {
     const { value, setValues } = useData()
     const map = useMap()
-    const map1 = useMapEvents({
-        moveend: () => {
-            const {_northEast, _southWest} =  map.getBounds();
-                  setValues( {"filtered":  value.features.filter(marker => 
-                             (_southWest.lat < marker.geometry.coordinates[0] 
-                            && marker.geometry.coordinates[0] < _northEast.lat
-                            && _southWest.lng < marker.geometry.coordinates[1] 
-                            && marker.geometry.coordinates[1] < _northEast.lng))}  )
-        },
+    const fetchMarkers = () => {
+        const {_northEast, _southWest} =  map.getBounds();
+        const baseURL = process.env.REACT_APP_API_HOST + 'api';
+        axios({
+            url: baseURL + '/item',
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data',
+            },
+            params: {
+                southWestLat: _southWest.lat,
+                southWestLng: _southWest.lng,
+                northEastLat: _northEast.lat,
+                northEastLng: _northEast.lng
+             }
+        }).then(res => {
+            setValues({ ...res.data, "currentMarker": null});
+        })
+    }
+    const map1 = useMapEvent({
+        moveend: () => fetchMarkers()
     })
-    // console.log("Map Bounds:", map.getBounds())
-    // console.log("Zoom Level:", map.getZoom())
-    // console.log(value)
+    useEffect(() => fetchMarkers(), [])
+    console.log(value)
 
     return (
         <>
@@ -30,12 +43,12 @@ const Layers = () => {
                         return (
                             <Marker key={marker?.properties?.id} position={marker?.geometry?.coordinates} eventHandlers={{
                                 click: (e) => {
-                                  setValues( {"filtered":  [marker] } )
+                                  setValues( {"currentMarker":  marker } )
                                 },
                               }}>
-                                <Popup>
+                                {/* <Popup>
                                     {marker?.properties?.name} <br /> {marker?.properties?.info}
-                                </Popup>
+                                </Popup> */}
                             </Marker>
                         )
                     })

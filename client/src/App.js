@@ -3,8 +3,10 @@ import Map from './components/Map';
 import { Grid } from '@mui/material';
 import Header from './components/Header';
 import MarkerList from './components/MarkerList';
+import { useData } from './data/DataContext';
 
 function App() {
+  const { value, setValues } = useData()
 
   return (
     <>
@@ -14,7 +16,7 @@ function App() {
           <Map />
         </Grid>
         <Grid item xs={3} >
-          <MarkerList />
+          <MarkerList currentList={value.currentMarker? [value.currentMarker]: value.features}/>
         </Grid>
       </Grid>
     </>
