@@ -52,7 +52,7 @@ const Map = () => {
         center={[49.0902, 27.7129]}
         zoom={9}
         zoomControl={false}
-        style={{ height: '92vh', width: '100%' }}
+        style={{ height: '91vh', width: '100%' }}
       >
         <Layers />
         {value.formOpened && <NewMarker />}

@@ -8,7 +8,7 @@ import { useData } from '../data/DataContext';
 export default function Header() {
     const { value, setValues } = useData()
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1, pb: 1 }}>
             <AppBar position="static" sx={{ bgcolor: brown[200] }}>
                 <Toolbar component="form">
                     <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>

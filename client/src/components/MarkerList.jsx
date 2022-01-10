@@ -7,7 +7,7 @@ import Item from './Item'
 export default function MarkerList({currentList}) {
     const { value, setValues } = useData()
     return (
-        <Grid container justifyContent="center" spacing={2} sx={{pt: 2}} >
+        <Grid container justifyContent="center" spacing={2} sx={{pt: 1}} >
             <Box sx={{ maxWidth: 440, height: "92vh", overflowY: "scroll" }}>
             {value.formOpened ?
                 <CreateItem /> :

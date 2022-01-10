@@ -30,7 +30,7 @@ const Layers = () => {
         moveend: () => fetchMarkers()
     })
     useEffect(() => fetchMarkers(), [])
-    console.log(value)
+    // console.log(value)
 
     return (
         <>
