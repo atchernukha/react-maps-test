@@ -25,7 +25,7 @@ export default function Item({ id, name, info, img }) {
     }
 
     return (
-        <Card sx={{ bgcolor: brown[50], mx: 2, mt: 2, borderRadius: 2 }} >
+        <Card sx={{ bgcolor: brown[50], mx: 2, mt: 1, borderRadius: 2 }} >
             <Grid container component="form" justifyContent="center" spacing={1}>
             <CardMedia
                 component="img"

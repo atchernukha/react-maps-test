@@ -8,7 +8,7 @@ export default function MarkerList({currentList}) {
     const { value, setValues } = useData()
     return (
         <Grid container justifyContent="center" spacing={2} sx={{pt: 2}} >
-            <Box sx={{ maxWidth: 410, height: "93vh", overflowY: "scroll" }}>
+            <Box sx={{ maxWidth: 440, height: "92vh", overflowY: "scroll" }}>
             {value.formOpened ?
                 <CreateItem /> :
                 currentList?.map( marker =>
@@ -16,7 +16,6 @@ export default function MarkerList({currentList}) {
                     <Item {...marker?.properties} />
                 </Grid>
             ) 
-
               }
             </Box>
         </Grid>
