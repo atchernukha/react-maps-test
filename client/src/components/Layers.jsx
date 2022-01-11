@@ -1,62 +1,70 @@
-import React, { useState } from 'react';
-import { useMapEvents, TileLayer, LayersControl, LayerGroup, GeoJSON, Marker, Popup, useMap, } from 'react-leaflet'
-import { Typography, Divider } from '@mui/material';
+import React, { useEffect } from 'react';
+import axios from 'axios';
+import { useMapEvent, TileLayer,  Marker, Popup, useMap, } from 'react-leaflet'
 import { useData } from '../data/DataContext';
-import MarkerList from './MarkerList';
-// import plane from 'https://www.iconspng.com/clipart/pirate-flag/pirate-flag.svg';
+import L from 'leaflet';
+import forRent from '../icons/forRent.svg';
 
+var forRentIcon = L.icon({
+    iconUrl: forRent,
+    shadowUrl: null,
+    iconSize: [36, 36], // size of the icon
+    iconAnchor: [6, 36], // point of the icon which will correspond to marker's location
+  });
 const Layers = () => {
     const { value, setValues } = useData()
     const map = useMap()
-    const map1 = useMapEvents({
-        zoomend: () => {
-            console.log(map.getZoom())
-        },
-        moveend: () => {
-            const {_northEast, _southWest} =  map.getBounds();
-                  setValues( {"filtered":  value.features.filter(marker => 
-                             (_southWest.lat < marker.geometry.coordinates[0] 
-                            && marker.geometry.coordinates[0] < _northEast.lat
-                            && _southWest.lng < marker.geometry.coordinates[1] 
-                            && marker.geometry.coordinates[1] < _northEast.lng))}  )
-        },
+    const fetchMarkers = () => {
+        const {_northEast, _southWest} =  map.getBounds();
+        const baseURL = process.env.REACT_APP_API_HOST + 'api';
+        axios({
+            url: baseURL + '/item',
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data',
+            },
+            params: {
+                southWestLat: _southWest.lat,
+                southWestLng: _southWest.lng,
+                northEastLat: _northEast.lat,
+                northEastLng: _northEast.lng
+             }
+        }).then(res => {
+            setValues({ ...res.data, "currentMarker": null});
+        })
+    }
+    const map1 = useMapEvent({
+        moveend: () => fetchMarkers()
     })
-    console.log("Map Bounds:", map.getBounds())
-    console.log("Zoom Level:", map.getZoom())
-    console.log(value)
+    useEffect(() => fetchMarkers(), [])
+    // console.log(value)
 
     return (
         <>
-            <LayersControl position='topright'>
-                <LayersControl.BaseLayer checked name='Basic Map'>
                     <TileLayer
                         attribution='&amp;copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                     />
-                </LayersControl.BaseLayer>
-                {/* <MarkerList /> */}
                 {
-                    // Iterate the borderData with .map():
                     value?.features?.map((marker) => {
-                        // Get the layer data from geojson:
-                        // const geojson = marker.geometry
-                        // Get the name of the state from geojson:
-                        // const state_name = marker.properties.name
                         return (
-                            // Pass data to layer via props:
-                            <Marker key={marker?.properties?.id} position={marker?.geometry?.coordinates} eventHandlers={{
+                            <Marker 
+                            key={marker?.properties?.id} 
+                            position={marker?.geometry?.coordinates} 
+                            icon={forRentIcon}
+                            eventHandlers={{
                                 click: (e) => {
-                                  setValues( {"filtered":  [marker] } )
+                                  setValues( {"currentMarker":  marker } )
                                 },
                               }}>
-                                <Popup>
+                                {/* <Popup>
                                     {marker?.properties?.name} <br /> {marker?.properties?.info}
-                                </Popup>
+                                </Popup> */}
                             </Marker>
                         )
                     })
                 }
-            </LayersControl>
         </>
     )
 }

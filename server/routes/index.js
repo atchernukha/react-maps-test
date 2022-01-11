@@ -1,8 +1,10 @@
 const Router = require('express')
+const imagesRouter =require('./images/imagesRouter')
+const itemRouter =require('./api/itemRoute')
 
 const router =new Router()
-const itemRouter =require('./itemRoute')
 
-router.use('/item', itemRouter)
+router.use('/images', imagesRouter)
+router.use('/api', itemRouter)
 
 module.exports =router
