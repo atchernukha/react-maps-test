@@ -8,8 +8,8 @@ import forRent from '../icons/forRent.svg';
 var forRentIcon = L.icon({
     iconUrl: forRent,
     shadowUrl: null,
-    iconSize: [36, 36], // size of the icon
-    iconAnchor: [6, 36], // point of the icon which will correspond to marker's location
+    iconSize: [34, 34], // size of the icon
+    iconAnchor: [6, 34], // point of the icon which will correspond to marker's location
   });
 const Layers = () => {
     const { value, setValues } = useData()

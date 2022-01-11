@@ -2,13 +2,14 @@
 
 ## Used Technologies
 
-* React, Material UI to build frontend
+* React, Material UI, react-leaflet to build frontend
 * Node/Express, Sequelize to backend
-* Postgres database
+* Postgres database  
+* s3 bucket AWS to store static files
 
 ## Result
 
-You can check the app running clicking [here](https://.herokuapp.com/)
+You can check the app running clicking [here](https://react-maps-test.herokuapp.com/)
 
 ## How to Run
 
